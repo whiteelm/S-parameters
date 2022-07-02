@@ -9,7 +9,7 @@ namespace SParamUI
     public partial class SParamForm : Form
     {
         /// <summary>
-        /// Значения по умолчанию.
+        /// Значения по умолчанию
         /// </summary>
         private SParams _sParameters = new SParams(
             500,
@@ -123,12 +123,12 @@ namespace SParamUI
             var points = Convert.ToDouble(sParameters.Fmin);
             for (var i = 2; i < sParameters.Nf; i++)
             {
-                chart1.Series[0].Points.AddXY(points, sParameters.S[0][i]);
-                chart1.Series[1].Points.AddXY(points, sParameters.S[1][i]);
-                chart1.Series[2].Points.AddXY(points, sParameters.S[2][i]);
-                chart1.Series[3].Points.AddXY(points, sParameters.Fi[0][i]);
-                chart1.Series[4].Points.AddXY(points, sParameters.Fi[1][i]);
-                chart1.Series[5].Points.AddXY(points, sParameters.Fi[2][i]);
+                chart1.Series[0].Points.AddXY(sParameters.F[i], sParameters.S[0][i]);
+                chart1.Series[1].Points.AddXY(sParameters.F[i], sParameters.S[1][i]);
+                chart1.Series[2].Points.AddXY(sParameters.F[i], sParameters.S[2][i]);
+                chart1.Series[3].Points.AddXY(sParameters.F[i], sParameters.Fi[0][i]);
+                chart1.Series[4].Points.AddXY(sParameters.F[i], sParameters.Fi[1][i]);
+                chart1.Series[5].Points.AddXY(sParameters.F[i], sParameters.Fi[2][i]);
                 points += interval;
             }
             chart1.ChartAreas[0].AxisX.Minimum = sParameters.Fmin;

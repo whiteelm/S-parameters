@@ -146,12 +146,12 @@ namespace SParameters
         }
 
         /// <summary>
-        /// Вых. конденсатор последовательный.
+        /// Вых. конденсатор последовательный
         /// </summary>
         private double _cs2;
 
         /// <summary>
-        /// Вых. конденсатор последовательный.
+        /// Вых. конденсатор последовательный
         /// </summary>
         public double Cs2
         {
@@ -170,12 +170,17 @@ namespace SParameters
         public List<double[]> Fi = new List<double[]>();
 
         /// <summary>
-        /// Мнимая единица.
+        /// Точки.
+        /// </summary>
+        public List<double> F = new List<double>();
+
+        /// <summary>
+        /// Мнимая единица
         /// </summary>
         public Complex32 Zi = new Complex32(0, 1);
 
         /// <summary>
-        /// Расчёт S-параметров.
+        /// Расчёт S-параметров
         /// </summary>
         /// <param name="nf">Количество точек.</param>
         /// <param name="fmin">Начало частотных точек.</param>
@@ -226,7 +231,6 @@ namespace SParameters
         {
             var z1 = new Complex32[Nf];
             var y1 = new Complex32[Nf];
-            var f = Vector<double>.Build.Dense(Nf);
             var w = Vector<double>.Build.Dense(Nf);
             var zo = Vector<Complex32>.Build.Dense(Nf);
             var gamma = Vector<Complex32>.Build.Dense(Nf);
@@ -249,11 +253,11 @@ namespace SParameters
             var fi11 = new double[Nf];
             var fi12 = new double[Nf];
             var fi22 = new double[Nf];
-            for (var i = 2; i < Nf; i++)
+            for (var i = 0; i < Nf; i++)
             {
-                f[i] = Fmin + ((double)Fmax - Fmin) /
-                    ((double)Nf - 1) * i;
-                w[i] = 2 * Math.PI * f[i] * 1e9;
+                F.Add(Fmin + ((double)Fmax - Fmin) /
+                    ((double)Nf - 1) * i);
+                w[i] = 2 * Math.PI * F[i] * 1e9;
                 z1[i] = (Complex32)R + Zi * (Complex32)w[i] * (Complex32)L;
                 y1[i] = (Complex32)G + Zi * (Complex32)C *
                     (Complex32)w[i];
